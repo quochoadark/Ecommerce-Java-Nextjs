@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "webbanhang1-context": {
-      "command": "node",
-      "args": ["C:/Users/ASUS/Documents/Webbanhang1 AI agent/mcp-server/index.js"]
-    }
-  }
-}
