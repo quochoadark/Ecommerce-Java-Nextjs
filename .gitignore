@@ -1,5 +1,18 @@
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+
 # Editor
 .vscode/
+.idea/
+
+# Node & Dependencies
+node_modules/
+.next/
+out/
+build/
+dist/
 
 # AI Agent / MCP Server
 mcp.json
@@ -8,5 +21,4 @@ mcp-server/node_modules/
 # OS generated files
 .DS_Store
 Thumbs.db
-
-# Rác
+desktop.ini

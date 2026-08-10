@@ -1,0 +1,56 @@
+name: webbanhang-fullstack
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-ecommerce
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: '${DB_NAME:-ecommerce}'
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD:-rootpassword}'
+    ports:
+      - '3307:3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - webbanhang-network
+
+  backend:
+    build:
+      context: ./backend/backend-ecommerce
+      dockerfile: Dockerfile
+    container_name: backend-ecommerce
+    restart: unless-stopped
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ecommerce?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+      DB_USERNAME: root
+      DB_PASSWORD: '${DB_PASSWORD:-rootpassword}'
+      JWT_SECRET: '${JWT_SECRET:-404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}'
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mysql
+    networks:
+      - webbanhang-network
+
+  frontend:
+    build:
+      context: ./front-end/front-end-ecommerce
+      dockerfile: Dockerfile
+    container_name: frontend-ecommerce
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8080
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
+    networks:
+      - webbanhang-network
+
+volumes:
+  mysql-data:
+
+networks:
+  webbanhang-network:
+    driver: bridge
