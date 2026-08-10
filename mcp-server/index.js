@@ -10,7 +10,7 @@ const server = new McpServer({
   version: "1.0.0"
 });
 
-const DOCS_DIR = path.resolve(__dirname, '../docs/ai_context');
+const DOCS_DIR = path.resolve(__dirname, '../vibe-coding-java-nextjs');
 const BACKEND_DIR = path.resolve(__dirname, '../backend/backend-ecommerce');
 const FRONTEND_DIR = path.resolve(__dirname, '../front-end/front-end-ecommerce');
 
